@@ -16,4 +16,5 @@ public:
     glm::vec3 Rotation;
     glm::vec3 Scale;
     Color Color;
+    class RigidBody2D* RigidBody;
 };

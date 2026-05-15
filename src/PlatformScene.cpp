@@ -1,6 +1,7 @@
 #include "PlatformScene.h"
 #include "OGLQuadRenderer.h"
 #include "OrthoCamera.h"
+#include "physics/RigidBody2D.h"
 
 void PlatformScene::Start() 
 {
@@ -12,6 +13,7 @@ void PlatformScene::Start()
     Quad* Player = new Quad(1, 1);
     Player->Position = glm::vec3{0, 0, 0};
     Player->Color = Color_Red;
+    Player->RigidBody = new RigidBody2D(Player);
     
     Quads.push_back(Floor);
     Quads.push_back(Player);    
