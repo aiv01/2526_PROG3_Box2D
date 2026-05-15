@@ -22,7 +22,7 @@ OrthoCamera::OrthoCamera(int InResoWidth, int InResoHeight, float InOrthoSize)
     float left = -HalfW;
     float right = HalfW;
     float bottom = -HalfH;
-    float top = HalfW;
+    float top = HalfH;
     Proj = glm::ortho(left, right, bottom, top, 0.f, 100.f);
 
     ViewProj =  Proj * View;
