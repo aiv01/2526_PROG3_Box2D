@@ -41,7 +41,7 @@ OGLQuadRender::OGLQuadRender()
 
 void OGLQuadRender::Draw(const std::vector<Quad*>& Quads, const OrthoCamera* Cam) 
 {
-    glViewport(0, 0, Cam->GetWidth(), Cam->GetHeight());
+    glViewport(0, 0, Cam->GetResoWidth(), Cam->GetResoHeight());
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBindVertexArray(Vao);
