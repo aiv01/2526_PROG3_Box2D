@@ -4,6 +4,7 @@ Physics2D::Physics2D(glm::vec2 InGravity, float InFixedDeltaTime)
     : World(b2Vec2{InGravity.x, InGravity.y})
 {
     FixedDeltaTime = InFixedDeltaTime;
+    World.SetContactListener(&Listener);
 }
 
 void Physics2D::Step() {

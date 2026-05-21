@@ -3,7 +3,7 @@
 #include "Quad.h"
 #include "physics/BoxCollider2D.h"
 
-RigidBody2D::RigidBody2D(Quad* InQuad)
+RigidBody2D::RigidBody2D(Quad* InQuad, RBodyType InBodyType)
 {
     Object = InQuad;
 
@@ -11,7 +11,7 @@ RigidBody2D::RigidBody2D(Quad* InQuad)
     {
         //1. Create Body in the Physics World
         b2BodyDef BodyDef;
-        BodyDef.type = b2BodyType::b2_dynamicBody;
+        BodyDef.type = static_cast<b2BodyType>(InBodyType);
         BodyDef.position = b2Vec2{Object->Position.x, Object->Position.y};
     
         auto* Physics = ServiceRegistry::GetInstance().GetPhysics();
@@ -20,7 +20,7 @@ RigidBody2D::RigidBody2D(Quad* InQuad)
     else 
     {
         Body = Object->BoxCollider->Body;
-        Body->SetType(b2BodyType::b2_dynamicBody);
+        Body->SetType(static_cast<b2BodyType>(InBodyType));
     }
 
     //2. At least one fixture per Body
@@ -46,4 +46,22 @@ void RigidBody2D::Update()
     b2Vec2 B2Pos = Body->GetPosition();
     Object->Position.x = B2Pos.x;
     Object->Position.y = B2Pos.y;
+}
+
+void RigidBody2D::AddForce(glm::vec2 InForce)
+{
+    b2Vec2 Force{InForce.x, InForce.y};
+    Body->ApplyForceToCenter(Force, true);
+}
+
+void RigidBody2D::AddImpulse(glm::vec2 InForce)
+{
+    b2Vec2 Force{InForce.x, InForce.y};
+    Body->ApplyLinearImpulseToCenter(Force, true);
+}
+
+void RigidBody2D::SetVelocity(glm::vec2 InVelocity)
+{
+    b2Vec2 Velocity{InVelocity.x, InVelocity.y};
+    Body->SetLinearVelocity(Velocity);
 }
