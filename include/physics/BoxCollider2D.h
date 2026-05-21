@@ -1,15 +1,15 @@
 #pragma once
 #include <box2d/box2d.h>
 
-class RigidBody2D
+class BoxCollider2D
 {
 public:
-    RigidBody2D(class Quad* InQuad);
+    class BoxCollider2D(class Quad* InQuad);
     void Update();
 private:
     class Quad* Object;
     class b2Body* Body;
     class b2Fixture* fixture;
 
-friend class BoxCollider2D;
+friend class RigidBody2D;
 };

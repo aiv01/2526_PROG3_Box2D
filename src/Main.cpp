@@ -41,6 +41,7 @@ int main() {
 		if (FixedTimeElapsed >= FixedDeltaTime) 
 		{
 			FixedTimeElapsed -= FixedDeltaTime;
+			Scene.FixedUpdate();
 			Physics.Step();
 		}
 	

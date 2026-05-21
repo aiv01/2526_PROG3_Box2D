@@ -1,20 +1,29 @@
 #include "physics/RigidBody2D.h"
 #include "ServiceRegistry.h"
 #include "Quad.h"
+#include "physics/BoxCollider2D.h"
 
 RigidBody2D::RigidBody2D(Quad* InQuad)
 {
     Object = InQuad;
 
-    //1. Create Body in the Physics World
-    b2BodyDef BodyDef;
-    BodyDef.type = b2_dynamicBody;
-    BodyDef.position = b2Vec2{Object->Position.x, Object->Position.y};
+    if (!Object->BoxCollider) 
+    {
+        //1. Create Body in the Physics World
+        b2BodyDef BodyDef;
+        BodyDef.type = b2BodyType::b2_dynamicBody;
+        BodyDef.position = b2Vec2{Object->Position.x, Object->Position.y};
+    
+        auto* Physics = ServiceRegistry::GetInstance().GetPhysics();
+        Body = Physics->CreateBody(&BodyDef);
+    } 
+    else 
+    {
+        Body = Object->BoxCollider->Body;
+        Body->SetType(b2BodyType::b2_dynamicBody);
+    }
 
-    auto* Physics = ServiceRegistry::GetInstance().GetPhysics();
-    Body = Physics->CreateBody(&BodyDef);
-
-    //2. At least one fixture per RigidBody
+    //2. At least one fixture per Body
     glm::vec3 bSize = InQuad->Scale;
     bSize *= 0.5f; //extent like
 

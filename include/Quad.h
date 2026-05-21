@@ -9,7 +9,9 @@ public:
     : Position(glm::vec3(0)), 
       Rotation(glm::vec3(0)), 
       Scale(glm::vec3(w, h, 0)),
-      Color(Color_White)
+      Color(Color_White),
+      RigidBody(nullptr), 
+      BoxCollider(nullptr) 
     {};
 
     glm::vec3 Position;
@@ -17,4 +19,11 @@ public:
     glm::vec3 Scale;
     Color Color;
     class RigidBody2D* RigidBody;
+    class BoxCollider2D* BoxCollider;
+
+    ~Quad()
+    {
+      if (RigidBody) delete RigidBody;
+      if (BoxCollider) delete BoxCollider;
+    }
 };
