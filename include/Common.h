@@ -27,3 +27,4 @@ struct Color {
 const Color Color_White = Color{1.f, 1.f, 1.f, 1.f};
 const Color Color_Red = Color{1.f, 0.f, 0.f, 1.f};
 const Color Color_Yellow = Color{1.f, 1.f, 0.f, 1.f};
+const Color Color_Purple = Color{0.5f, 0.f, 1.f, 1.f};
