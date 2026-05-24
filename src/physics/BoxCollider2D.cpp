@@ -3,11 +3,11 @@
 #include "Quad.h"
 #include "physics/RigidBody2D.h"
 
-BoxCollider2D::BoxCollider2D(Quad* InQuad, CollisionCallback InCallback)
+BoxCollider2D::BoxCollider2D(Quad* InQuad/*, CollisionCallback InCallback*/)
 {
     Object = InQuad;
-    UserData = InCallback;
-    UserData.Object = Object;
+   /* UserData = InCallback;
+    UserData.Object = Object;*/
 
     if (!Object->RigidBody)
     {
@@ -36,7 +36,16 @@ BoxCollider2D::BoxCollider2D(Quad* InQuad, CollisionCallback InCallback)
 	fixtureDef.shape = &box;
     fixtureDef.isSensor = false;
 
-    fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&UserData);
+    fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 
     fixture = Body->CreateFixture(&fixtureDef);
+}
+
+void BoxCollider2D::Update()
+{
+}
+
+Quad* BoxCollider2D::GetObject() const
+{
+    return Object;
 }

@@ -9,6 +9,8 @@ Physics2D::Physics2D(glm::vec2 InGravity, float InFixedDeltaTime)
 
 void Physics2D::Step() {
     World.Step(FixedDeltaTime, 8, 3);
+    //TODO: i will insert here my stay function
+    Listener.StayContact();
 }
 
 b2Body* Physics2D::CreateBody(const b2BodyDef* InDef)

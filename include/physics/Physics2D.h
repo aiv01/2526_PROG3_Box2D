@@ -12,7 +12,7 @@ public:
 private:
     b2World World;
     float FixedDeltaTime;
-    PhysicsContactListener Listener;
+    PhysicsContactListener Listener;//imposta il nostro listener come lsitener del mondo nel cpp
 };
 
 
