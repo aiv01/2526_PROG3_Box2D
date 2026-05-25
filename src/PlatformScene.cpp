@@ -26,12 +26,15 @@ void PlatformScene::Start()
         std::cout << "Player OnEnter: " << Object->Name << "\n";
     };
     Player->BoxCollider = new BoxCollider2D(Player, PlayerCb);
+    // TODO: Improve callback implemtation like:
+    // Player->BoxCollider->OnEnter = function;
 
     Platform = new Quad(3, 1);
     Platform->Position = glm::vec3(3, 0, 0);
     Platform->Color = Color_Yellow;
     Platform->RigidBody = new RigidBody2D(Platform, RBodyType::Kinematic);
 
+    // TODO: Avoid to define callback for the one who dont need it.
     CollisionCallback PlatformCb;
     Platform->BoxCollider = new BoxCollider2D(Platform, PlatformCb);
 

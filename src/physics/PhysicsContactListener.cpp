@@ -20,7 +20,10 @@ void PhysicsContactListener::BeginContact(b2Contact* InContact)
     CbB->OnEnter(CbA->Object);
 }
 
+// TODO: Complete EndContact
 void PhysicsContactListener::EndContact(b2Contact* InContact) 
 {
     std::cout << "EndContact\n";
 }
+
+//TODO: Implement OnCollisionStay
